@@ -7,10 +7,11 @@ Customer churn impact revenue and SWE (subscription with event) which competitor
 This project provides **proactive prediction model** to help reduce churn by focus retention efforts on high-risk users which generate high-revenue  
 
 # 3. Dataset
-- Total rows:
-- Features
+A Fictional telco company that provided home phone and Internet services
+- Total rows: 7043 customer
+- Features: 33 variables
 - Target: churn (1=churned, 0=stayed)
-- Data comes from: source / kaggle / synthetic 
+- Data comes from: latest version "path = kagglehub.dataset_download("yeanzc/telco-customer-churn-ibm-dataset")" 
 
 # 4. Approach & Methods
 **Data Processing**
@@ -34,6 +35,9 @@ This project provides **proactive prediction model** to help reduce churn by foc
 # 6. Insight
 
 # 7. How to Run
+
+```bash
 pip install -requirement.txt
 python src/train.py
 python src/predict.py
+```
