@@ -1,0 +1,12 @@
+# env files
+.env
+
+# directory
+.secrets/
+# token files
+access.token
+refresh.token
+
+# compile files
+__pycache__/
+*.pyc
