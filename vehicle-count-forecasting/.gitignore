@@ -1,9 +1,12 @@
 # env files
-src.env
+git.env
+.env.*
+*.env
 
-# directory
-src.secrets/
-# token files
+# secrets
+.secrets/
+*.secret
+*.token
 access.token
 refresh.token
 
