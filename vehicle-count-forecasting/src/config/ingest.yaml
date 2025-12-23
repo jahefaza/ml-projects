@@ -1,0 +1,20 @@
+asset:
+  name: VTC-DEMO-CAM1
+
+objects:
+  - mobil_pribadi
+  - truk
+  - pickup
+
+collection:
+  start_date: "07/05/2025"
+  batch: 2
+
+telemetry:
+  interval_ms: 7200000 #2*60*60*1000
+  aggregation: SUM
+
+retry:
+  start_batch: 1
+  max_retry: 3
+  timeout: 30

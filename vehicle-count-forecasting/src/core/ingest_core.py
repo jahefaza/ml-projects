@@ -1,10 +1,11 @@
-from .auth import TokenManager
-from .api import generate_batch, fetch_with_retry
+from services.auth import TokenManager
+from services.api import generate_batch, fetch_with_retry
 
 import os
 from datetime import datetime, timedelta, timezone, time as dt_time
 
-def pipeline(config):
+def ingestion(config):
+    print(f'Fetching data {config['asset_name']}')
 
     manager = TokenManager(
         server = config['server'],

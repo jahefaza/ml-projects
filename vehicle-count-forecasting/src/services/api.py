@@ -51,7 +51,7 @@ def fetch_with_retry(
 
         current_batch = range_batch[batch_to_run -1]
         all_data = {}
-
+    
         print(f'Running batch {batch_to_run} with {len(current_batch)} parts')
 
         for i, (start_date_str,  end_date_str) in enumerate(current_batch, 1):
@@ -94,7 +94,7 @@ def fetch_with_retry(
             all_data.setdefault(key, []).extend(range_data.get(key, []))
             time.sleep(1)
         
-        output_path = output_dir/"data"/"raw"/f"batch_{batch_to_run}.json"
+        output_path = output_dir/"data"/"raw"/f"batch_{batch_to_run}_tes.json"
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
         with open(output_path, 'w') as f:

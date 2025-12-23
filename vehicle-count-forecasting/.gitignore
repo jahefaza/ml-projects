@@ -1,8 +1,8 @@
 # env files
-.env
+src.env
 
 # directory
-.secrets/
+src.secrets/
 # token files
 access.token
 refresh.token
