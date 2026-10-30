@@ -3,7 +3,9 @@ from typing import Literal
 
 class AnalyticsConfig(BaseModel):
     telemetry: str = Field(min_length=1)
-    training_window: str
+    training_window: str = Field(min_length=1)
+    device_profile: str = Field(min_length=1)
+
     model_name: Literal[
         'regression',
         'isolation_forest'

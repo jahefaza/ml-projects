@@ -1,19 +1,16 @@
 from dataclasses import dataclass
 import pandas as pd
 
-LOAD_COL = 'load_percent'
-AMBIENT = 'temp_ambient'
-
 @dataclass(frozen=True)
 class MachineConfig:
-    regression_features: list[str]
-    min_load: float
+    req_features: tuple[str, ...]
+    min_load: float = 5.0
 
 AIR_COMPRESSOR_1 = MachineConfig(
-    regression_features=[
+    req_features=(
         'load_percent',
         'temp_ambient'
-    ],
+    ),
     min_load=5.0
 )
 
@@ -22,7 +19,7 @@ def air_compressor_1(
 ) -> pd.DataFrame:
     
     data = df.copy()
-    req_cols = [LOAD_COL, AMBIENT]
+    req_cols = AIR_COMPRESSOR_1.req_features
     missing = [col for col in req_cols if col not in data.columns]
 
     if missing:
@@ -31,13 +28,11 @@ def air_compressor_1(
     if 'press_discharge' in data.columns and 'press_oil' in data.columns:
         data['press_diff'] = data['press_oil'] - data['press_discharge']
     
-    data[LOAD_COL] = pd.to_numeric(
-        data[LOAD_COL],
-        errors='coerce'
-    )
+    for col in req_cols:
+        data[col] = pd.to_numeric(data[col], errors='coerce')
+    
+    data = data.loc[data['load_percent'] > AIR_COMPRESSOR_1.min_load].copy()
+    if data.empty:
+        raise ValueError('No valid air-compressor data')
 
-    data = data.loc[
-        data[LOAD_COL] > AIR_COMPRESSOR_1.min_load
-    ].copy()
-
-    return data.dropna(subset=[LOAD_COL, AMBIENT])
+    return data.dropna(subset=AIR_COMPRESSOR_1.req_features)
